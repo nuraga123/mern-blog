@@ -10,8 +10,8 @@ export default (req, res, next) => {
       req.userId = decoded._id;
       next();
     } catch (error) {
-      return res.status(405).json({
-        message: "нет доступа 5",
+      return res.status(406).json({
+        message: "нет доступа 6",
       });
     }
   } else {

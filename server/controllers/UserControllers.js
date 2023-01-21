@@ -126,3 +126,30 @@ export const deleteUser = async (req, res) => {
     res.status(500).json({ message: "failed to me" });
   }
 };
+
+export const removeUsersAll = async (req, res) => {
+  try {
+    UserModel.deleteMany((err, doc) => {
+      if (err) {
+        console.log(err);
+        return res.status(505).json({
+          message: "не удалось удалить user из remove 5",
+        });
+      }
+
+      if (!doc) {
+        return res.status(501).json({
+          message: "не найдена статья users из getAll 1",
+        });
+      }
+
+      res.json({ seccess: "delete users all" });
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      message: "Не удалось УДАЛИТЬ всех пользователей",
+    });
+  }
+};

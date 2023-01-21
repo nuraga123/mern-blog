@@ -15,7 +15,7 @@ export const create = async (req, res) => {
     const comment = await docComment.save();
     res.json(comment);
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
 
     res.status(500).json({
       message: "Не удалось создать комментарий create",

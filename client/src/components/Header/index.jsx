@@ -11,6 +11,7 @@ import Container from "@mui/material/Container";
 export const Header = () => {
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
+  const userName = useSelector((state) => state.auth.data);
 
   const onClickLogout = () => {
     if (window.confirm("Do you want to log out ?")) {
@@ -24,8 +25,13 @@ export const Header = () => {
       <Container maxWidth="lg">
         <div className={styles.inner}>
           <Link className={styles.logo} to="/home/posts">
-            <div>AZERIMED</div>
+            AZERIMED
           </Link>
+          {userName?.fullname ? (
+            <div className={styles.userName}>user: {userName?.fullname}</div>
+          ) : (
+            <div className={styles.userName}>Гость</div>
+          )}
           <div className={styles.buttons}>
             {isAuth ? (
               <>

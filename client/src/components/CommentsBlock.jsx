@@ -25,7 +25,18 @@ export const CommentsBlock = ({ commentsList, children, isLoading = true }) => {
                       <Skeleton variant="circular" width={40} height={40} />
                     </div>
                   ) : (
-                    <Avatar alt={obj.user.fullname} src={obj.user.avatarUrl} />
+                    <div>
+                      <div>userID === {obj?.user?._id.slice(20)}</div>
+                      <br />
+                      <div>commnetID === {obj?._id.slice(20)}</div>
+                      <br />
+                      <div>
+                        <Avatar
+                          alt={obj?.user?.fullname}
+                          src={obj?.user?.avatarUrl}
+                        />
+                      </div>
+                    </div>
                   )}
                 </ListItemAvatar>
                 {isLoading ? (
@@ -34,10 +45,16 @@ export const CommentsBlock = ({ commentsList, children, isLoading = true }) => {
                     <Skeleton variant="text" height={18} width={230} />
                   </div>
                 ) : (
-                  <ListItemText
-                    primary={obj.user.fullname}
-                    secondary={obj.comment}
-                  />
+                  <div>
+                    <br />
+                    <br />
+                    <br />  
+                    <br />  
+                    <ListItemText
+                      primary={obj?.user?.fullname}
+                      secondary={obj?.comment}
+                    />
+                  </div>
                 )}
               </ListItem>
               <Divider variant="inset" component="li" />

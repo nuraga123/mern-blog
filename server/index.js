@@ -51,6 +51,9 @@ app.get("/", (req, res) => {
 
 // USER API
 app.get("/auth/users", UserController.getUsers);
+
+app.delete("/auth/users", UserController.removeUsersAll);
+
 app.get("/auth/me", checkAuth, UserController.getMe);
 
 app.post(
