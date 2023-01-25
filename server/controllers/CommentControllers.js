@@ -4,12 +4,13 @@ export const create = async (req, res) => {
   try {
     const date = new Date().toISOString().slice(0, 10);
     const time = new Date().toString().slice(16, 21);
-    console.log(date);
+
     const docComment = new CommentModel({
       comment: req.body.comment,
-      user: req.userId,
       date: date,
       time: time,
+      postId: req.body.postId,
+      user: req.userId,
     });
 
     const comment = await docComment.save();
@@ -29,6 +30,7 @@ export const getComment = async (req, res) => {
 
     res.json(comments);
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Не удалось получит комментарии getComment",
     });

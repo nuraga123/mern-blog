@@ -21,14 +21,15 @@ function App() {
       <Header />
       <Container maxWidth="lg">
         <Routes>
-          <Route path="/home/posts" element={<Home />} />
+          <Route path="/posts" element={<Home />} />
           <Route path="*" element={<Home />} />
-          <Route path="/home/posts/popular" element={<Home />} />
+          <Route path="/posts/popular" element={<Home />} />
           <Route path="/posts/:id" element={<FullPost />} />
           <Route path="/posts/:id/edit" element={<AddPost />} />
           <Route path="/add-post" element={<AddPost />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
+          <Route path="/tags" element={<Home />} />
         </Routes>
       </Container>
     </>

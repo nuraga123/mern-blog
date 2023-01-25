@@ -85,8 +85,10 @@ app.delete("/posts", PostController.removePostsAll);
 app.get("/posts/popular", PostController.getAllPopular);
 
 app.get("/posts/:id", PostController.getOne);
+
 // POST/TAGS API
 app.get("/tags", PostController.getLastTags);
+app.get("/tags/name", checkAuth, PostController.getTags);
 
 // POST API and checkAuth
 app.post(

@@ -13,48 +13,36 @@ import { Index } from "../components/AddComment";
 
 export const FullPost = () => {
   const dispatch = useDispatch();
-  const { comments, posts } = useSelector((state) => state.posts);
-  const commentsCount = comments?.commentsList.length;
-
+  const { comments } = useSelector((state) => state.posts);
   const [data, setData] = React.useState();
   const [isLoading, setIsLoading] = React.useState(true);
   const { id } = useParams();
 
   const isAuth = useSelector(selectIsAuth);
+  const filtered = comments?.commentsList.filter((el) => el.postId === id);
 
   useEffect(() => {
     axiosInstance
       .get(`/posts/${id}`)
-      .then((res) => {
-        setData(res.data);
+      .then(({ data }) => {
+        setData(data);
         setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
         alert(err.message);
       });
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     dispatch(fetchComment());
     dispatch(fetchPosts());
   }, [dispatch]);
 
-  const usersArray = posts?.items;
-  const commentsArray = comments?.commentsList;
-  let result = [];
-  for (let index = 0; index < usersArray.length; index++) {
-    const element = usersArray[index]?.user?._id;
-
-    result = commentsArray.filter(
-      (commentID) => commentID?.user?._id === element
-    );
-  }
-  console.log(result);
-
   if (isLoading) {
     return <Post isLoading={isLoading} FullPost />;
   }
+
   return (
     <>
       <Post
@@ -65,15 +53,15 @@ export const FullPost = () => {
         date={data.date}
         time={data.time}
         viewsCount={data.viewsCount}
-        commentsCount={commentsCount}
+        commentsCount={filtered.length}
         tags={data.tags}
         isFullPost
       >
         <ReactMarkdown children={data.text} />
       </Post>
-      <CommentsBlock commentsList={result ? result : []} isLoading={false}>
+      <CommentsBlock commentsList={filtered ? filtered : []} isLoading={false}>
         {isAuth ? (
-          <Index />
+          <Index postId={id} />
         ) : (
           <h1 style={{ color: "red" }}>
             только зарегистрированный пользователь может писать комментарии !!!

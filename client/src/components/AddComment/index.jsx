@@ -10,15 +10,15 @@ import axiosInstance from "../../axiosInstance";
 import { useDispatch } from "react-redux";
 import { fetchComment } from "../../redux/slices/post";
 
-export const Index = () => {
+export const Index = ({ postId }) => {
   const dispatch = useDispatch();
-
   const [myComment, setMyComment] = useState("");
 
   const sendComment = async () => {
     try {
       console.log("sendComment");
-      const send = { comment: myComment };
+      const send = { comment: myComment, postId: postId };
+      console.log(send);
       await axiosInstance.post("/comment", send);
       dispatch(fetchComment());
       setMyComment("");

@@ -2,16 +2,13 @@ import mongoose from "mongoose";
 
 const CommentSchema = new mongoose.Schema(
   {
-    comment: { type: String },
+    postId: String,
+    comment: String,
+    date: { type: String },
+    time: { type: String },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-    },
-    date: {
-      type: String,
-    },
-    time: {
-      type: String,
     },
   },
   { timestamps: true }

@@ -55,37 +55,37 @@ export const Registration = () => {
           type={"text"}
           className={styles.field}
           label="Полное имя"
-          fullWidth
           error={Boolean(errors.fullname?.message)}
           helperText={Boolean(errors.fullname?.message)}
           {...register("fullname", { required: "no fullname" })}
+          fullWidth
         />
 
         <TextField
           type={"email"}
           className={styles.field}
           label="E-Mail"
-          fullWidth
           error={Boolean(errors.email?.message)}
           helperText={Boolean(errors.email?.message)}
           {...register("email", { required: "no email" })}
+          fullWidth
         />
 
         <TextField
           type={"password"}
           className={styles.field}
           label="Пароль"
-          fullWidth
           error={Boolean(errors.password?.message)}
           helperText={Boolean(errors.password?.message)}
           {...register("password", { required: "no fullname" })}
+          fullWidth
         />
         <Button
           type="submit"
           size="large"
           variant="contained"
-          fullWidth
           disabled={!isValid}
+          fullWidth
         >
           Зарегистрироваться
         </Button>

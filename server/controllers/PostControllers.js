@@ -4,11 +4,12 @@ export const create = async (req, res) => {
   try {
     const date = new Date().toISOString().slice(0, 10);
     const time = new Date().toString().slice(16, 21);
+
     const doc = new PostModel({
-      title: req.body.title,
-      text: req.body.text,
-      tags: req.body.tags.split(","),
       imageUrl: req.body.imageUrl,
+      title: req.body.title,
+      tags: req.body.tags.split(","),
+      text: req.body.text,
       user: req.userId,
       date: date,
       time: time,
@@ -28,7 +29,7 @@ export const create = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-    const posts = await PostModel.find().populate("user");
+    const posts = await PostModel.find().populate("user").exec();
 
     res.json(posts);
   } catch (error) {
@@ -36,6 +37,40 @@ export const getAll = async (req, res) => {
 
     res.status(500).json({
       message: "Не удалось получить список статей",
+    });
+  }
+};
+
+export const getTags = async (req, res) => {
+  try {
+    const name = req.params.id;
+    const posts = await PostModel.findOne(
+      {
+        _id: name,
+      },
+      (err, doc) => {
+        if (err) {
+          console.log(err.message);
+
+          return res.status(500).json({
+            message: "не удалось вернуть статью из getTags",
+          });
+        }
+        if (!doc) {
+          return res.status(500).json({
+            message: "не найдена статья DOC из getTags",
+          });
+        }
+        res.json(doc);
+      }
+    );
+
+    console.log(posts);
+  } catch (error) {
+    console.log(error.message);
+
+    res.status(500).json({
+      message: "Не удалось получить список  getTags",
     });
   }
 };

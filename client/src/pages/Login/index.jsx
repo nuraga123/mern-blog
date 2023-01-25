@@ -19,7 +19,6 @@ export const Login = () => {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
@@ -72,8 +71,8 @@ export const Login = () => {
           type="submit"
           size="large"
           variant="contained"
-          fullWidth
           disabled={!isValid}
+          fullWidth
         >
           Войти
         </Button>

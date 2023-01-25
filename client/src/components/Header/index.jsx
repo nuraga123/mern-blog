@@ -24,7 +24,7 @@ export const Header = () => {
     <div className={styles.root}>
       <Container maxWidth="lg">
         <div className={styles.inner}>
-          <Link className={styles.logo} to="/home/posts">
+          <Link className={styles.logo} to="/posts">
             AZERIMED
           </Link>
           {userName?.fullname ? (

@@ -66,7 +66,7 @@ export const AddPost = () => {
         imageUrl,
         tags: tags,
       };
-      
+
       const { data } = isEditing
         ? await axiosInstance.patch(`/posts/${id}`, fields)
         : await axiosInstance.post("/posts/", fields);
@@ -164,9 +164,9 @@ export const AddPost = () => {
         classes={{ root: styles.tags }}
         variant="standard"
         placeholder="Тэги"
-        fullWidth
         value={tags}
         onChange={(event) => setTags(event.target.value)}
+        fullWidth
       />
 
       <SimpleMDE

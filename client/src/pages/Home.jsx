@@ -31,9 +31,6 @@ export const Home = () => {
     (state) => state.posts
   );
 
-  const TagsBlockKey = posts?.items.map((id) => id?._id);
-  const commentsCount = comments?.commentsList.length;
-
   const isPostLoading = posts.status === "loading";
   const isTagsLoading = tags.status === "loading";
   const isCommentLoading = comments.status === "loading";
@@ -55,7 +52,7 @@ export const Home = () => {
   };
 
   const mapPosts =
-    domen === "/home/posts/popular"
+    domen === "/posts/popular"
       ? postsPopular?.items?.map((obj, index) => (
           <Post
             id={obj._id}
@@ -68,7 +65,7 @@ export const Home = () => {
             date={obj.date}
             time={obj.time}
             viewsCount={obj.viewsCount}
-            commentsCount={commentsCount}
+            commentsCount={0}
             isLoading={false}
             tags={obj.tags}
             isEditable={userData?._id === obj?.user?._id}
@@ -86,7 +83,7 @@ export const Home = () => {
             time={obj.time}
             date={obj.date}
             viewsCount={obj.viewsCount}
-            commentsCount={commentsCount}
+            commentsCount={0}
             isLoading={false}
             tags={obj.tags}
             isEditable={userData?._id === obj?.user?._id}
@@ -115,11 +112,11 @@ export const Home = () => {
         value={category}
         aria-label="basic tabs example"
       >
-        <Link to={"/home/posts"}>
+        <Link to={"/posts"}>
           <Tab label="Новые" onClick={() => setCategory(0)} />
         </Link>
 
-        <Link to={"/home/posts/popular"}>
+        <Link to={"/posts/popular"}>
           <Tab
             label="Популярное"
             onClick={() => setCategory(1)}
@@ -127,19 +124,15 @@ export const Home = () => {
           />
         </Link>
       </Tabs>
+
       <Grid container spacing={4}>
         <Grid xs={8} item id={"posts"}>
           {posts?.items?.length >= 1 ? mapPosts : <div>not posts</div>}
         </Grid>
+
         <Grid xs={4} item>
-          {tags?.Items &&
-            TagsBlockKey.map((_, index) => (
-              <TagsBlock
-                key={index}
-                items={tags.items}
-                isLoading={isTagsLoading}
-              />
-            ))}
+          {/* <TagsBlock items={tags?.items} isLoading={isTagsLoading}/> */}
+
           <CommentsBlock
             commentsList={comments?.commentsList}
             isLoading={false}

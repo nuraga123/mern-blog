@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -26,16 +26,10 @@ export const CommentsBlock = ({ commentsList, children, isLoading = true }) => {
                     </div>
                   ) : (
                     <div>
-                      <div>userID === {obj?.user?._id.slice(20)}</div>
-                      <br />
-                      <div>commnetID === {obj?._id.slice(20)}</div>
-                      <br />
-                      <div>
-                        <Avatar
-                          alt={obj?.user?.fullname}
-                          src={obj?.user?.avatarUrl}
-                        />
-                      </div>
+                      <Avatar
+                        alt={obj?.user?.fullname}
+                        src={obj?.user?.avatarUrl}
+                      />
                     </div>
                   )}
                 </ListItemAvatar>
@@ -46,10 +40,6 @@ export const CommentsBlock = ({ commentsList, children, isLoading = true }) => {
                   </div>
                 ) : (
                   <div>
-                    <br />
-                    <br />
-                    <br />  
-                    <br />  
                     <ListItemText
                       primary={obj?.user?.fullname}
                       secondary={obj?.comment}

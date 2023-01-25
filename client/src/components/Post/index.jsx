@@ -43,7 +43,6 @@ export const Post = ({
   return (
     <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
       <div> {id ? `post ID=> ${id.slice(20)}` : "not id"}</div>
-      <div> {user ? `USER ID=> ${user?._id.slice(20)}` : "not id"}</div>
       {isEditable && (
         <div className={styles.editButtons}>
           <Link to={`/posts/${id}/edit`}>

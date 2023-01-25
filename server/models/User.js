@@ -1,9 +1,8 @@
-import mongoose, { now } from "mongoose";
+import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
   {
-    fullname: { type: String },
-
+    fullname: String,
     email: {
       type: String,
       require: true,
@@ -11,19 +10,14 @@ const UserSchema = new mongoose.Schema(
       unique: true,
       sparse: true,
     },
-    date: {
-      type: String,
-    },
-    time: {
-      type: String,
-    },
+    date: String,
+    time: String,
     passwordHush: {
       type: String,
       required: true,
     },
     avatarUrl: String,
   },
-
   { timestamps: true }
 );
 
